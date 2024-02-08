@@ -3,16 +3,20 @@ using TMPro;
 
 public class TypingManager : MonoBehaviour
 {
-    string[] word = { "hello", "bye", "happy" };
+    string[] word;
 
     [SerializeField]
     TextMeshProUGUI text;
+
+    [SerializeField]
+    TextAsset textFileSource;
 
     private int _answerPtr = 0;
     private int randomIndex;
 
     void Start()
     {
+        ReadTextFile(textFileSource);
         ShowNewText();
     }
 
@@ -48,5 +52,10 @@ public class TypingManager : MonoBehaviour
         _answerPtr = 0;
         randomIndex = Random.Range(0, word.Length);
         text.text = word[randomIndex];
+    }
+
+    void ReadTextFile(TextAsset textFile)
+    {
+        word = textFile.text.Split('\n');
     }
 }
