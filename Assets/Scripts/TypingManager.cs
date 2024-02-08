@@ -25,6 +25,9 @@ public class TypingManager : MonoBehaviour
                 // Correct
                 _answerPtr++;
 
+                // Show correct color response
+                text.text =  "<color=#C5E90B>" + word[randomIndex].Substring(0, _answerPtr) + "</color>" + word[randomIndex].Substring(_answerPtr);
+
                 if (_answerPtr >= word[randomIndex].Length)
                 {
                     ShowNewText();
@@ -33,6 +36,9 @@ public class TypingManager : MonoBehaviour
             else
             {
                 // Incorrect
+                text.text =  "<color=#C5E90B>" + word[randomIndex].Substring(0, _answerPtr) + "</color>" 
+                            + "<color=#FF0000>" + word[randomIndex].Substring(_answerPtr, 1) + "</color>"  
+                            + word[randomIndex].Substring(_answerPtr + 1);
             }
         }
     }
