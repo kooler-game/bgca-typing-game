@@ -19,11 +19,13 @@ public class TypingManager : MonoBehaviour
     public GameObject gameoverPanel;
     public TextMeshProUGUI typedText;
     public TextMeshProUGUI timeText;
+    public TextMeshProUGUI wpmText;
 
     private int _answerPtr = 0;
     private int randomIndex;
 
-    private int usedSeconds = 0;
+    private float usedSeconds = 0;
+    private string wpm => (wordTyped / System.Math.Max(1, usedSeconds) * 60).ToString();
 
     void Start()
     {
@@ -78,6 +80,7 @@ public class TypingManager : MonoBehaviour
     void SetScoreText(int current, int target)
     {
         typedText.text = "Typed: " + current.ToString() + "/" + target.ToString();
+        wpmText.text = "WPM: " + (wordTyped / (usedSeconds / 60)).ToString("0.00");
     }
 
     void ShowNewText()
@@ -98,6 +101,7 @@ public class TypingManager : MonoBehaviour
         {
             usedSeconds += 1;
             timeText.text = "Time: " + usedSeconds + "s";
+            wpmText.text = "WPM: " + (wordTyped / (usedSeconds / 60)).ToString("0.00");
         }
     }
 
