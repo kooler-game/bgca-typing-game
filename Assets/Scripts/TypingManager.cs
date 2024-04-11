@@ -18,15 +18,20 @@ public class TypingManager : MonoBehaviour
     private bool inGame = true;
     public GameObject gameoverPanel;
     public TextMeshProUGUI typedText;
+    public TextMeshProUGUI timeText;
 
     private int _answerPtr = 0;
     private int randomIndex;
+
+    private int usedSeconds = 0;
 
     void Start()
     {
         ReadTextFile(textFileSource);
         ShowNewText();
         SetScoreText(0, targetWord);
+
+        InvokeRepeating(nameof(UpdateTimer), 1f, 1f);
     }
 
     void Update()
@@ -85,6 +90,15 @@ public class TypingManager : MonoBehaviour
     void ReadTextFile(TextAsset textFile)
     {
         word = textFile.text.Split('\n');
+    }
+
+    void UpdateTimer()
+    {
+        if (inGame)
+        {
+            usedSeconds += 1;
+            timeText.text = "Time: " + usedSeconds + "s";
+        }
     }
 
     public static void RestartGame()
