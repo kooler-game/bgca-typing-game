@@ -26,7 +26,6 @@ public class TypingManager : MonoBehaviour
     private int randomIndex;
 
     private float usedSeconds = 0;
-    private string wpm => (wordTyped / System.Math.Max(1, usedSeconds) * 60).ToString();
 
     void Start()
     {
@@ -73,6 +72,7 @@ public class TypingManager : MonoBehaviour
         if (wordTyped >= targetWord)
         {
             // Game End
+            ScoreManager.EndGame(wordTyped / (usedSeconds / 60));
             inGame = false;
             gameoverPanel.SetActive(true);
         }
