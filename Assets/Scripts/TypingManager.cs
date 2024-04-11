@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TypingManager : MonoBehaviour
 {
@@ -84,5 +85,12 @@ public class TypingManager : MonoBehaviour
     void ReadTextFile(TextAsset textFile)
     {
         word = textFile.text.Split('\n');
+    }
+
+    public static void RestartGame()
+    {
+        // Temp: Scene Reload
+        string currentScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentScene);
     }
 }
