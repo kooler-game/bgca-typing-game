@@ -93,4 +93,9 @@ public class TypingManager : MonoBehaviour
         string currentScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentScene);
     }
+
+    public static void BacktoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
