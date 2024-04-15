@@ -8,8 +8,7 @@ public static class ScoreManager
     static ScoreManager()
     {
         rankingWPM = LoadScore();
-        Debug.Log("Constructor");
-        PrintScore(rankingWPM);
+        // PrintScore(rankingWPM);
     }
 
     public static void EndGame(float wpm)
@@ -31,7 +30,7 @@ public static class ScoreManager
             }
         }
 
-        PrintScore(rankingWPM);
+        // PrintScore(rankingWPM);
         SaveScore(rankingWPM);
     }
 
@@ -49,8 +48,8 @@ public static class ScoreManager
     {
         string saveDataJsonString = PlayerPrefs.GetString(wpmSaveDataKey);
         SaveData saveData = JsonUtility.FromJson<SaveData>(saveDataJsonString);
-        Debug.Log("Load Score");
-        PrintScore(saveData.wpms);
+        // Debug.Log("Load Score");
+        // PrintScore(saveData.wpms);
         return saveData.wpms;
     }
 

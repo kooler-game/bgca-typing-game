@@ -26,6 +26,7 @@ public class TypingManager : MonoBehaviour
     private int randomIndex;
 
     private float usedSeconds = 0;
+    private float wpm => wordTyped / System.Math.Max(1 / 60f, usedSeconds / 60f);
 
     void Start()
     {
@@ -72,7 +73,7 @@ public class TypingManager : MonoBehaviour
         if (wordTyped >= targetWord)
         {
             // Game End
-            ScoreManager.EndGame(wordTyped / (usedSeconds / 60));
+            ScoreManager.EndGame(wpm);
             inGame = false;
             gameoverPanel.SetActive(true);
         }
@@ -81,8 +82,8 @@ public class TypingManager : MonoBehaviour
     void SetScoreText(int current, int target)
     {
         typedText.text = "Typed: " + current.ToString() + "/" + target.ToString();
-        wpmText.text = "WPM: " + (wordTyped / (usedSeconds / 60)).ToString("0.00");
-        gameoverWPM.text = "WPM: " + (wordTyped / (usedSeconds / 60)).ToString("0.00");
+        wpmText.text = "WPM: " + wpm.ToString("0.00");
+        gameoverWPM.text = "WPM: " + wpm.ToString("0.00");
     }
 
     void ShowNewText()
@@ -103,7 +104,7 @@ public class TypingManager : MonoBehaviour
         {
             usedSeconds += 1;
             timeText.text = "Time: " + usedSeconds + "s";
-            wpmText.text = "WPM: " + (wordTyped / (usedSeconds / 60)).ToString("0.00");
+            wpmText.text = "WPM: " + wpm.ToString("0.00");
         }
     }
 
