@@ -20,7 +20,7 @@ public static class ScoreManager
                 // shift array right by 1 and record current
                 if (i < rankingWPM.Length - 1)
                 {
-                    for (int j = i + 1; j < rankingWPM.Length; j++)
+                    for (int j = rankingWPM.Length - 1; j >= i + 1; j--)
                     {
                         rankingWPM[j] = rankingWPM[j - 1];
                     }
@@ -42,15 +42,23 @@ public static class ScoreManager
         };
 
         PlayerPrefs.SetString(wpmSaveDataKey, saveData.ToJson());
+        PlayerPrefs.Save();
     }
 
     private static float[] LoadScore()
     {
-        string saveDataJsonString = PlayerPrefs.GetString(wpmSaveDataKey);
-        SaveData saveData = JsonUtility.FromJson<SaveData>(saveDataJsonString);
-        // Debug.Log("Load Score");
-        // PrintScore(saveData.wpms);
-        return saveData.wpms;
+        if (PlayerPrefs.HasKey(wpmSaveDataKey))
+        {
+            string saveDataJsonString = PlayerPrefs.GetString(wpmSaveDataKey);
+            SaveData saveData = JsonUtility.FromJson<SaveData>(saveDataJsonString);
+            // Debug.Log("Load Score");
+            // PrintScore(saveData.wpms);
+            if (saveData != null)
+            {
+                return saveData.wpms;
+            }
+        }
+        return rankingWPM;
     }
 
 
