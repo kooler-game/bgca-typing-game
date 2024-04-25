@@ -41,6 +41,8 @@ public class TypingManager : MonoBehaviour
     {
         if (inGame && Input.anyKeyDown)
         {
+            SoundEffectManager.Instance.OnType();
+
             if (Input.GetKeyDown(word[randomIndex][_answerPtr].ToString()))
             {
                 // Correct
@@ -66,6 +68,7 @@ public class TypingManager : MonoBehaviour
 
     void Correct()
     {
+        SoundEffectManager.Instance.OnCorrect();
         ShowNewText();
         wordTyped++;
         SetScoreText(wordTyped, targetWord);
@@ -111,12 +114,14 @@ public class TypingManager : MonoBehaviour
     public static void RestartGame()
     {
         // Temp: Scene Reload
+        SoundEffectManager.Instance.OnClick();
         string currentScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentScene);
     }
 
     public static void BacktoMainMenu()
     {
+        SoundEffectManager.Instance.OnClick();
         SceneManager.LoadScene("MainMenu");
     }
 }

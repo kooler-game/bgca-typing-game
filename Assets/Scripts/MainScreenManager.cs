@@ -11,6 +11,8 @@ public class MainScreenManager : MonoBehaviour
     public static void StartGame()
     {
         SceneManager.LoadScene("Game");
+
+        SoundEffectManager.Instance.OnClick();
     }
 
     public void OnClickRankingMenu()
@@ -25,11 +27,15 @@ public class MainScreenManager : MonoBehaviour
 
         mainMenuPanel.SetActive(false);
         rankingMenuPanel.SetActive(true);
+
+        SoundEffectManager.Instance.OnClick();
     }
 
     public void OnClickBackToMainMenu()
     {
         rankingMenuPanel.SetActive(false);
         mainMenuPanel.SetActive(true);
+
+        SoundEffectManager.Instance.OnClick();
     }
 }
