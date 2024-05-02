@@ -1,16 +1,18 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
 
 public class TypingManager : MonoBehaviour
 {
     string[] word;
 
-    [SerializeField]
-    TextMeshProUGUI text;
+    [SerializeField] TextMeshProUGUI text;
 
-    [SerializeField]
-    TextAsset textFileSource;
+    [SerializeField] TextAsset textFileSource;
+
+    [SerializeField] LocalizedString timerLocalizedString;
+    [SerializeField] LocalizedString typedCountLocalizedString;
 
     public int targetWord = 10;
     private int wordTyped = 0;
@@ -30,6 +32,11 @@ public class TypingManager : MonoBehaviour
 
     void Start()
     {
+        timerLocalizedString.Arguments = new object[] { usedSeconds };
+        timerLocalizedString.StringChanged += UpdateTimerText;
+        typedCountLocalizedString.Arguments = new object[] { wordTyped, targetWord };
+        typedCountLocalizedString.StringChanged += UpdateTypedCountText;
+
         ReadTextFile(textFileSource);
         ShowNewText();
         SetScoreText(0, targetWord);
@@ -84,7 +91,10 @@ public class TypingManager : MonoBehaviour
 
     void SetScoreText(int current, int target)
     {
-        typedText.text = "Typed: " + current.ToString() + "/" + target.ToString();
+        typedCountLocalizedString.Arguments[0] = current.ToString();
+        typedCountLocalizedString.Arguments[1] = target.ToString();
+        typedCountLocalizedString.RefreshString();
+
         wpmText.text = "WPM: " + wpm.ToString("0.00");
         gameoverWPM.text = "WPM: " + wpm.ToString("0.00");
     }
@@ -106,7 +116,8 @@ public class TypingManager : MonoBehaviour
         if (inGame)
         {
             usedSeconds += 1;
-            timeText.text = "Time: " + usedSeconds + "s";
+            timerLocalizedString.Arguments[0] = usedSeconds;
+            timerLocalizedString.RefreshString();
             wpmText.text = "WPM: " + wpm.ToString("0.00");
         }
     }
@@ -123,5 +134,15 @@ public class TypingManager : MonoBehaviour
     {
         SoundEffectManager.Instance.OnClick();
         SceneManager.LoadScene("MainMenu");
+    }
+
+    private void UpdateTimerText(string value)
+    {
+        timeText.text = value;
+    }
+
+    private void UpdateTypedCountText(string value)
+    {
+        typedText.text = value;
     }
 }

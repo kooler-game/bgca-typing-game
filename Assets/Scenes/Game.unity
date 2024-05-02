@@ -1240,12 +1240,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 1690533527}
   textFileSource: {fileID: 4900000, guid: b7f4d2e696f0349e2a36850826a7f81f, type: 3}
+  timerLocalizedString:
+    m_TableReference:
+      m_TableCollectionName: GUID:c8fe95763499f45b5911ffd240fdceef
+    m_TableEntryReference:
+      m_KeyId: 11771854184448
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  typedCountLocalizedString:
+    m_TableReference:
+      m_TableCollectionName: GUID:c8fe95763499f45b5911ffd240fdceef
+    m_TableEntryReference:
+      m_KeyId: 997264775438336
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   targetWord: 3
   gameoverPanel: {fileID: 1642840721}
   typedText: {fileID: 2131769489}
   timeText: {fileID: 329495530}
   wpmText: {fileID: 1639277754}
   gameoverWPM: {fileID: 298126276}
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &1087334152
 Transform:
   m_ObjectHideFlags: 0
