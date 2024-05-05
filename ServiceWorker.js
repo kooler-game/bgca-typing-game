@@ -1,9 +1,9 @@
 const cacheName = "DefaultCompany-bgca-typing-game-1.0";
 const contentToCache = [
-    "Build/TypingGame-Build.loader.js",
-    "Build/TypingGame-Build.framework.js.unityweb",
-    "Build/TypingGame-Build.data.unityweb",
-    "Build/TypingGame-Build.wasm.unityweb",
+    "Build/bgca-typing-game.loader.js",
+    "Build/bgca-typing-game.framework.js.unityweb",
+    "Build/bgca-typing-game.data.unityweb",
+    "Build/bgca-typing-game.wasm.unityweb",
     "TemplateData/style.css"
 
 ];
