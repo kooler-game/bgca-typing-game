@@ -3,6 +3,12 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Localization;
 
+public struct GameProgress
+{
+    public int wordTyped;
+    public int usedSeconds;
+}
+
 public class TypingManager : MonoBehaviour
 {
     string[] word;
@@ -14,8 +20,7 @@ public class TypingManager : MonoBehaviour
     [SerializeField] LocalizedString timerLocalizedString;
     [SerializeField] LocalizedString typedCountLocalizedString;
 
-    public int targetWord = 10;
-    private int wordTyped = 0;
+    // private int wordTyped = 0;
 
     private bool inGame = true;
     public GameObject gameoverPanel;
@@ -27,19 +32,35 @@ public class TypingManager : MonoBehaviour
     private int _answerPtr = 0;
     private int randomIndex;
 
-    private float usedSeconds = 0;
-    private float wpm => wordTyped / System.Math.Max(1 / 60f, usedSeconds / 60f);
+    GameProgress gameProgress = new GameProgress
+    {
+        wordTyped = 0,
+        usedSeconds = 0
+    };
+
+    private float wpm => gameProgress.wordTyped / System.Math.Max(1 / 60f, gameProgress.usedSeconds / 60f);
+
+    // Game Mode Specific
+    public static GameMode gamemode = GameMode.COUNT;
+    public ModeManager modeManager;
+    public int targetWord = 10;
+    public int targetSecond = 10;
 
     void Start()
     {
-        timerLocalizedString.Arguments = new object[] { usedSeconds };
+        modeManager = ModeManager.CreateModelManager(gamemode);
+
+        timerLocalizedString.Arguments = new object[] { gameProgress.usedSeconds };
         timerLocalizedString.StringChanged += UpdateTimerText;
-        typedCountLocalizedString.Arguments = new object[] { wordTyped, targetWord };
+        typedCountLocalizedString.Arguments = new object[] { gameProgress.wordTyped };
         typedCountLocalizedString.StringChanged += UpdateTypedCountText;
 
         ReadTextFile(textFileSource);
         ShowNewText();
         SetScoreText(0, targetWord);
+        timerLocalizedString.Arguments[0] = modeManager.GetTimerText(gameProgress.usedSeconds, targetSecond);
+        timerLocalizedString.RefreshString();
+
 
         InvokeRepeating(nameof(UpdateTimer), 1f, 1f);
     }
@@ -77,22 +98,18 @@ public class TypingManager : MonoBehaviour
     {
         SoundEffectManager.Instance.OnCorrect();
         ShowNewText();
-        wordTyped++;
-        SetScoreText(wordTyped, targetWord);
+        gameProgress.wordTyped++;
+        SetScoreText(gameProgress.wordTyped, targetWord);
 
-        if (wordTyped >= targetWord)
+        if (modeManager.IsGameOver(gameProgress, targetWord))
         {
-            // Game End
-            ScoreManager.EndGame(wpm);
-            inGame = false;
-            gameoverPanel.SetActive(true);
+            GameEnd();
         }
     }
 
     void SetScoreText(int current, int target)
     {
-        typedCountLocalizedString.Arguments[0] = current.ToString();
-        typedCountLocalizedString.Arguments[1] = target.ToString();
+        typedCountLocalizedString.Arguments[0] = modeManager.GetScoreText(gameProgress.wordTyped, targetWord); ;
         typedCountLocalizedString.RefreshString();
 
         wpmText.text = "WPM: " + wpm.ToString("0.00");
@@ -115,10 +132,15 @@ public class TypingManager : MonoBehaviour
     {
         if (inGame)
         {
-            usedSeconds += 1;
-            timerLocalizedString.Arguments[0] = usedSeconds;
+            gameProgress.usedSeconds += 1;
+            timerLocalizedString.Arguments[0] = modeManager.GetTimerText(gameProgress.usedSeconds, targetSecond);
             timerLocalizedString.RefreshString();
             wpmText.text = "WPM: " + wpm.ToString("0.00");
+
+            if (modeManager.IsGameOver(gameProgress, targetWord))
+            {
+                GameEnd();
+            }
         }
     }
 
@@ -144,5 +166,12 @@ public class TypingManager : MonoBehaviour
     private void UpdateTypedCountText(string value)
     {
         typedText.text = value;
+    }
+
+    private void GameEnd()
+    {
+        ScoreManager.EndGame(wpm);
+        inGame = false;
+        gameoverPanel.SetActive(true);
     }
 }

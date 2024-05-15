@@ -1258,12 +1258,13 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  targetWord: 3
   gameoverPanel: {fileID: 1642840721}
   typedText: {fileID: 2131769489}
   timeText: {fileID: 329495530}
   wpmText: {fileID: 1639277754}
   gameoverWPM: {fileID: 298126276}
+  targetWord: 3
+  targetSecond: 3
   references:
     version: 2
     RefIds: []

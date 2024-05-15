@@ -45,7 +45,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5067772294222053418
   - m_Id: 997264775438336
-    m_Localized: 'Typed: {0} / {1}'
+    m_Localized: 'Typed: {0}'
     m_Metadata:
       m_Items:
       - rid: 5067772294222053418

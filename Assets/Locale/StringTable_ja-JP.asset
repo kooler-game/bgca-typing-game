@@ -45,7 +45,7 @@ MonoBehaviour:
       m_Items:
       - rid: 5067772294222053419
   - m_Id: 997264775438336
-    m_Localized: "\u76EE\u6A19: {0} / {1}"
+    m_Localized: "\u76EE\u6A19: {0}"
     m_Metadata:
       m_Items:
       - rid: 5067772294222053419
