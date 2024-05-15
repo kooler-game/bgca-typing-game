@@ -49,6 +49,18 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 5067772294222053418
+  - m_Id: 4666277586001920
+    m_Localized: GameOver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4666638921097216
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4666957562372096
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

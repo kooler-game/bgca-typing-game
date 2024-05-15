@@ -43,6 +43,18 @@ MonoBehaviour:
     m_Key: TypedCount
     m_Metadata:
       m_Items: []
+  - m_Id: 4666277586001920
+    m_Key: game_gameover_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4666638921097216
+    m_Key: game_gameover_restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4666957562372096
+    m_Key: game_gameover_mainmenu
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
