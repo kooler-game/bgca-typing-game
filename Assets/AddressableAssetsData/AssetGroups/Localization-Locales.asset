@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Localization-Locales
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Locales
-  m_Data:
-    m_SerializedData: []
   m_GUID: a9de6cb8843bc480b84ab4ec8057162e
   m_SerializeEntries:
   - m_GUID: 4393d0e02380148aeb50b4e1d770cbc0
